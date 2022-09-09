@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Bootstrap CSS -->
+    <link href="css/fonts/fonts.css" rel="stylesheet" type="text/css" />
+
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <title>Pearson Accessible HTML Template</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        
+        nav ul {
+            display: flex;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            padding: 10px;
+        }
+        
+        ul li {
+            list-style: none;
+            margin: 10px 10px;
+        }
+        
+        ul li a {
+            list-style: none;
+            margin: 10px 15px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 400;
+        }
+        
+        header {
+            background-color: #f8f9fa;
+        }
+        /* tooltip */
+        
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            border-bottom: 1px dotted black;
+        }
+        
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 50%;
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            position: absolute;
+            z-index: 1;
+            /* margin-top: 150px; */
+            /* margin-left: 10px; */
+            margin: 50px;
+        }
+        
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+        }
+        /* tooltip */
+        /* row and col */
+        
+        .row {
+            display: flex;
+            width: 100%;
+            flex-direction: row;
+        }
+        
+        .tooltip {
+            margin: 10px;
+            width: 50%;
+        }
+        
+        .Startertemplate {
+            display: flex;
+            width: 100%;
+        }
+        
+        .mytext {
+            width: 50%;
+        }
+        /* row and col */
+    </style>
+</head>
+
+<body>
+    <main>
+        <header>
+            <nav>
+                <ul>
+                    <li> <a href="#"> Home</li></a>
+                        <li> <a href="#"> Starter template</a></li>
+                        <li> <a href="#"> Typography</a></li>
+                        <li> <a href="#"> Components</a></li>
+                </ul>
+            </nav>
+        </header>
+        <section id="starter">
+
+
+            <div class="row">
+
+                <div class="tooltip">
+                    <img src="/images/img.png" alt="" width="100%">
+                    <span class="tooltiptext">
+                     
+                     <p>hi, <br> my name is Pranay Badgujar <br></p>
+                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quam debitis sint numquam aperiam rerum, eveniet similique ratione animi beatae voluptate explicabo non illum quaerat at aut tempora vel voluptatum accusantium.</p>
+                    </span>
+                </div>
+
+                <div class="tooltip">
+
+                    <div class="text " style="position: relative;">
+
+
+
+                    </div>
+
+                    <!-- <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Excepturi neque natus dignissimos dolores, voluptatibus voluptas assumenda eligendi nulla omnis similique? Suscipit culpa laborum omnis non doloribus dignissimos recusandae -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </div>
+
+
+            </div>
+
+            <div class="Startertemplate ">
+                <div class="mytext">
+                    <h1>Starter template</h1>
+                </div>
+                <div class="mytext">
+                    <h1>content</h1>
+                </div>
+            </div>
+
+</body>
+
+</html>
+
+
+
+
+
+</section>
+<hr/>
+
+<footer></footer>
+</main>
+
+
+
+</body>
+
+</html>

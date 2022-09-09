@@ -1,0 +1,1498 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@200&display=swap" rel="stylesheet">
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Mulish', sans-serif;
+        }
+        /* header */
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        nav ul {
+            display: flex;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            padding: 10px;
+        }
+        
+        nav ul li {
+            list-style: none;
+            margin: 10px 10px;
+        }
+        
+        ul li a {
+            list-style: none;
+            margin: 10px 15px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 400;
+        }
+        
+        header {
+            background-color: #f8f9fa;
+            /* background-color: #011427; */
+            width: 100%;
+        }
+        /* header */
+        
+        .grand_parent {
+            width: 100vw;
+            height: 100vh;
+            /* background: #000; */
+            background: #dfe6e9;
+            color: #fff;
+        }
+        
+        h1 {
+            font-size: 4rem;
+            padding: 20px 0;
+            text-align: center;
+            color: #000;
+        }
+        
+        p {
+            text-align: center;
+        }
+        
+        .parents {
+            width: 80vw;
+            height: auto;
+            margin: auto;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            transition: all 0.2 linear;
+        }
+        
+        .child {
+            /* height: 50vh; */
+            /* background: #81ecec; */
+            /* box-shadow: 0 0 20px #bac3c3; */
+            flex: 1 1 200px;
+            margin: 20px;
+            overflow: hidden;
+        }
+        
+        .child:first-child {
+            /* background: #000; */
+            color: #000;
+        }
+        
+        @media (max-width: 768px) {
+            .grand_parent {
+                height: auto;
+            }
+        }
+        /* tool */
+        
+        .tooltip {
+            position: relative;
+            border-bottom: 1px dotted black;
+        }
+        
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            z-index: 1;
+        }
+        
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+        }
+        
+        body>div {
+            width: 90%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 5rem;
+            margin-bottom: 5rem;
+        }
+        
+        details div {
+            border-left: 2px solid #000;
+            border-right: 2px solid #000;
+            border-bottom: 2px solid #000;
+            padding: 1.5em;
+        }
+        
+        details div>*+* {
+            margin-top: 1.5em;
+        }
+        
+        details+details {
+            margin-top: .5rem;
+        }
+        
+        summary {
+            list-style: none;
+        }
+        
+        summary {
+            border: 2px solid #000;
+            padding: .75em 1em;
+            cursor: pointer;
+            position: relative;
+            padding-left: calc(1.75rem + .75rem + .75rem);
+        }
+        
+        summary:before {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: .75rem;
+            content: "↓";
+            width: 1.75rem;
+            height: 1.75rem;
+            background-color: #000;
+            color: #FFF;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        
+        details[open] summary {
+            background-color: #eee;
+        }
+        
+        details[open] summary:before {
+            content: "↑";
+        }
+        
+        summary:hover {
+            background-color: #eee;
+        }
+        
+        a {
+            /* color: inherit;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 1px 0 0; */
+        }
+        
+        a:hover {
+            /* box-shadow: 0 3px 0 0; */
+        }
+        
+        code {
+            font-family: monospace;
+            font-weight: 600;
+        }
+        /* acco */
+        /* tab */
+        
+        .tab {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+        }
+        /* Style the buttons inside the tab */
+        
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            font-size: 17px;
+        }
+        /* Change background color of buttons on hover */
+        
+        .tab button:hover {
+            background-color: #ddd;
+        }
+        /* Create an active/current tablink class */
+        
+        .tab button.active {
+            background-color: #ccc;
+        }
+        /* Style the tab content */
+        
+        .tabcontent {
+            display: none;
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+        /* tab */
+        /* dropwdown */
+        
+        .space {
+            height: 20%;
+        }
+        
+        .layout {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgb(236, 236, 236);
+            height: 60%;
+            min-height: fit-content;
+        }
+        
+        .container .item-container {
+            max-height: 0;
+            transition: max-height 0.3s;
+            overflow: hidden;
+        }
+        
+        .container {
+            margin-top: 25px;
+            text-align: center;
+            background: rgb(223, 223, 223);
+            border-radius: 5px;
+            border: 1px solid white;
+            max-width: 300px;
+            min-width: 300px;
+            box-shadow: 0px 0px 5px black;
+        }
+        
+        .container:hover {
+            background: rgb(212, 212, 212);
+        }
+        
+        .dropdown-title {
+            margin: 15px 0px 15px 0px;
+            min-height: 10px;
+            font-weight: 900;
+            font-size: 1.3rem;
+        }
+        
+        .item-container {
+            background: rgb(255, 255, 255);
+            font-size: 1rem;
+            border-radius: 0px 0px 3px 3px;
+        }
+        
+        .item-text {
+            margin: 0px 0px 0px 0px;
+            padding: 15px 10px 15px 10px;
+            font-weight: 900;
+        }
+        
+        .item-text:hover {
+            background: rgb(231, 231, 231);
+        }
+        /* dropwdown */
+        /* flipcard */
+        
+        .cardContainer {
+            display: flex;
+            flex-direction: row;
+            flex-grow: 4;
+            justify-content: space-around;
+            padding: 24px;
+            gap: 25px;
+        }
+        
+        .flip-card {
+            color: black !important;
+            display: flex;
+            flex-wrap: wrap;
+            padding: 24px 14px;
+            height: 450px;
+            width: 325px;
+            background: white;
+            box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37);
+            backdrop-filter: blur( 4px);
+            -webkit-backdrop-filter: blur( 4px);
+            border-radius: 10px;
+            border: 1px solid rgba( 255, 255, 255, 0.18);
+            white-space: normal;
+            overflow: hidden;
+            perspective: 500px;
+            -webkit-perspective: 500px;
+        }
+        
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            -webkit-transform-style: preserve-3d;
+            -webkit-transition: transform 0.6s;
+        }
+        
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(+180deg);
+        }
+        
+        .flip-card-front,
+        .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            transform: rotateX(0deg);
+        }
+        
+        .flip-card-front {
+            color: black;
+        }
+        
+        .flip-card-back {
+            display: grid;
+            place-items: center;
+            height: 100%;
+            width: 100%;
+            background-color: white;
+            color: black;
+            transform: rotateY(-180deg);
+        }
+        /* flipcard */
+        /* timeline */
+        
+         :root {
+            /* --primary-color: #f4f4f4; */
+            --background-color: #111;
+            --font: sans-serif;
+        }
+        
+        .timeline {
+            background: var(--primary-color);
+            margin: 20px auto;
+            padding: 20px;
+        }
+        
+        .card {
+            position: relative;
+            max-width: 400px;
+        }
+        
+        .card:nth-child(odd) {
+            padding: 30px 0 30px 30px;
+        }
+        
+        .card:nth-child(even) {
+            padding: 30px 30px 30px 0;
+        }
+        
+        .card::before {
+            content: "";
+            position: absolute;
+            width: 50%;
+            border: solid orangered;
+        }
+        
+        .card:nth-child(odd)::before {
+            left: 0px;
+            top: -4.5px;
+            bottom: -4.5px;
+            border-width: 5px 0 5px 5px;
+            border-radius: 50px 0 0 50px;
+        }
+        
+        .card:nth-child(even)::before {
+            right: 0;
+            top: 0;
+            bottom: 0;
+            border-width: 5px 5px 5px 0;
+            border-radius: 0 50px 50px 0;
+        }
+        
+        .card:first-child::before {
+            border-top: 0;
+            border-top-left-radius: 0;
+        }
+        
+        .card:last-child:nth-child(odd)::before {
+            border-bottom: 0;
+            border-bottom-left-radius: 0;
+        }
+        
+        .card:last-child:nth-child(even)::before {
+            border-bottom: 0;
+            border-bottom-right-radius: 0;
+        }
+        
+        .info {
+            display: flex;
+            flex-direction: column;
+            background: #333;
+            color: gray;
+            border-radius: 10px;
+            padding: 10px;
+        }
+        
+        .title {
+            color: orangered;
+            position: relative;
+        }
+        
+        .title::before {
+            content: "";
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 999px;
+            border: 3px solid orangered;
+        }
+        
+        .card:nth-child(even)>.info>.title {
+            text-align: right;
+        }
+        
+        .card:nth-child(odd)>.info>.title::before {
+            left: -45px;
+        }
+        
+        .card:nth-child(even)>.info>.title::before {
+            right: -45px;
+        }
+        /* timeline */
+        /* slideshow */
+        
+        .myslides {
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+        }
+        /* SLIDER */
+        
+        .myslides .slider {
+            height: 100%;
+            white-space: nowrap;
+            font-size: 0;
+            transition: 0.8s;
+        }
+        /* SLIDES */
+        
+        .myslides .slider>* {
+            font-size: 1rem;
+            display: inline-block;
+            white-space: normal;
+            vertical-align: top;
+            height: 100%;
+            width: 100%;
+            background: none 50% no-repeat;
+            background-size: cover;
+        }
+        
+        .myslides .prevNext {
+            position: absolute;
+            z-index: 1;
+            top: 50%;
+            width: 100%;
+            height: 0;
+        }
+        
+        .myslides .prevNext>div+div {
+            visibility: hidden;
+        }
+        
+        .myslides .prevNext a {
+            background: #fff;
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            line-height: 60px;
+            text-align: center;
+            opacity: 0.7;
+            -webkit-transition: 0.3s;
+            transition: 0.3s;
+            -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+            left: 0;
+        }
+        
+        .myslides .prevNext a:hover {
+            opacity: 1;
+        }
+        
+        .myslides .prevNext a+a {
+            left: auto;
+            right: 0;
+        }
+        
+        .myslides .bullets {
+            position: absolute;
+            z-index: 2;
+            bottom: 0;
+            padding: 10px 0;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .myslides .bullets>a {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            text-decoration: none;
+            text-align: center;
+            background: rgba(255, 255, 255, 1);
+            -webkit-transition: 0.3s;
+            transition: 0.3s;
+        }
+        
+        .myslides .bullets>a+a {
+            background: rgba(255, 255, 255, 0.5);
+        }
+        
+        .myslides .bullets>a:hover {
+            background: rgba(255, 255, 255, 0.7) !important;
+        }
+        
+        .myslides>s:target~.bullets>* {
+            background: rgba(255, 255, 255, 0.5);
+        }
+        
+        #s1:target~.bullets>*:nth-child(1) {
+            background: rgba(255, 255, 255, 1);
+        }
+        
+        #s2:target~.bullets>*:nth-child(2) {
+            background: rgba(255, 255, 255, 1);
+        }
+        
+        #s3:target~.bullets>*:nth-child(3) {
+            background: rgba(255, 255, 255, 1);
+        }
+        
+        #s4:target~.bullets>*:nth-child(4) {
+            background: rgba(255, 255, 255, 1);
+        }
+        
+        .myslides>s:target~.prevNext>* {
+            visibility: hidden;
+        }
+        
+        #s1:target~.prevNext>*:nth-child(1) {
+            visibility: visible;
+        }
+        
+        #s2:target~.prevNext>*:nth-child(2) {
+            visibility: visible;
+        }
+        
+        #s3:target~.prevNext>*:nth-child(3) {
+            visibility: visible;
+        }
+        
+        #s4:target~.prevNext>*:nth-child(4) {
+            visibility: visible;
+        }
+        
+        #s1:target~.slider {
+            transform: translateX( 0%);
+            -webkit-transform: translateX( 0%);
+        }
+        
+        #s2:target~.slider {
+            transform: translateX(-100%);
+            -webkit-transform: translateX(-100%);
+        }
+        
+        #s3:target~.slider {
+            transform: translateX(-200%);
+            -webkit-transform: translateX(-200%);
+        }
+        
+        #s4:target~.slider {
+            transform: translateX(-300%);
+            -webkit-transform: translateX(-300%);
+        }
+        
+        .myslides {
+            color: #fff;
+            text-align: center;
+        }
+        
+        .myslides .slider h2 {
+            margin-top: 40vh;
+            font-weight: 200;
+            letter-spacing: -0.06em;
+            word-spacing: 0.2em;
+            font-size: 3em;
+        }
+        
+        .myslides a {
+            border-radius: 50%;
+            margin: 0 3px;
+            color: rgba(0, 0, 0, 0.8);
+            text-decoration: none;
+        }
+        /* slideshow */
+        
+         ::placeholder {
+            color: rgb(3, 3, 3);
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <header>
+        <nav>
+            <ul>
+                <li>
+                    <a href="#"> <b>Home</b></li>
+                </a>
+                <li>
+                    <a href="#start"> <b>Starter template</b></a>
+                </li>
+                <li>
+                    <a href="#Typography"> <b>Typography</b></a>
+                </li>
+                <li>
+                    <a href="#Components"> <b>Components</b></a>
+                </li>
+            </ul>
+        </nav>
+        <div class="grand_parent">
+
+            <div class="tooltip" style="border-bottom: 3px solid black;">
+                <h1 style="color: #94e7ea;"> <span style="color: orangered;">I</span>ntroduction </h1>
+                <span class="tooltiptext">Introdcution of my topic</span>
+            </div>
+
+
+
+
+            <div class="parents" style="width: 100%;">
+                <div class="child">
+                    <strong><p style="word-wrap: break-word;">Hi , <br> my name is pranay <br>im a web developer</p>
+                        <p style="word-wrap: break-word;">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Corrupti minus sed tenetur consequatur inventore ratione quasi repellat? Quisquam, ratione. Voluptatem recusandae nam, sapiente voluptates odit asperiores molestiae dolorum
+                            nulla explicabo.</p>
+                        <p style="word-wrap: break-word;">Lorem ipsum dolor sit amet, consectetur adipisicing nisi odit ullam, quibusdam tempore tenetur voluptates ut neque quam?</p>
+    </strong>
+                </div>
+                <div class="child" style="width: 100%;">
+                    <img src="./images/img.png" alt="" width="100%">
+                </div>
+                <!-- <div class="child">
+                    <p></p>
+                </div> -->
+            </div>
+        </div>
+        <!-- starttertemplate -->
+        <h1 style="color: #94e7ea;" id="start"> <span style="color: orangered;">S</span>tarter <span style="color: orangered;">T</span>emplate</h1>
+        <hr style="width: 350px;margin: auto;background-color: orangered;"><br>
+        <div class="imgbox " style="border: 2px solid gray;width: 90%;text-align: center;margin-left: 50px;height: 90%;display: flex;flex-direction: column;flex: 50%; ">
+            <!-- <div class="imgbox " style="border: 2px solid #94e7ea;width: 90%;text-align: center;margin-left: 50px;height: 600px; "> -->
+            <div class="fullPanel" style=" clear: both; background-color: #94e7ea;width: 100%;height: 100%;">
+                <p style="text-align: left;padding-top: 10px;padding-left: 10px;"><strong>&lt;!DOCTYPE html&gt;</strong><br /><strong>&lt;html lang="en"&gt;</strong><br /><strong>&nbsp; &nbsp; &nbsp; &nbsp; &lt;head&gt;</strong><br /><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;!-- Required meta tags --&gt;</strong><br
+                    /><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;meta charset="utf-8" /&gt;</strong><br /><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;meta name="viewport" content="width=device-width, initial-scale=1" /&gt;</strong><br
+                    /><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;!-- Bootstrap CSS --&gt;</strong><br /><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;link href="css/fonts/fonts.css" rel="stylesheet" type="text/css" /&gt;</strong><br
+                    /><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;link href="css/lib/bootstrap.min.css" rel="stylesheet" /&gt;</strong><br /><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;link href="css/style.css" rel="stylesheet" type="text/css" /&gt;</strong><br
+                    /><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;title&gt;Pearson Accessible HTML Template&lt;/title&gt;</strong><br /><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;/head&gt;</strong><br /><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;body&gt;</strong><br
+                    /><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;main&gt;</strong><br /><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;header&gt;</strong></p>
+                <p style="text-align: left;"><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/header&gt;</strong><br /><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;section id="starter"&gt;</strong><br /> <br /><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;/section&gt;</strong><br
+                    /><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;hr/&gt;</strong></p>
+                <p style="text-align: left;"><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;footer&gt;&lt;/footer&gt;</strong><br /><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/main&gt;</strong></p>
+                <p style="text-align: left;"><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;script src="js/jquery-3.5.1.min.js"&gt;&lt;/script&gt;</strong><br /><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;script src="js/lib/bootstrap.bundle.min.js"&gt;&lt;/script&gt;</strong><br
+                    /><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;script src="js/script.js"&gt;&lt;/script&gt;</strong><br /><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;/body&gt;</strong><br /><strong>&lt;/html&gt;</strong></p>
+            </div>
+
+        </div>
+
+
+        <!-- starttertemplate -->
+
+
+        <!-- accordion -->
+        <div>
+            <h1 style="color: #94e7ea;" id="Typography"> <span style="color: orangered;">T</span>ypography <span style="color: orangered;">+</span> <span style="color: orangered;">A</span>ccordion</h1>
+            <hr style="width: 350px;margin: auto;background-color: orangered;"><br>
+            <p> Documentation and examples for typography, headings, body text, lists, and more.</p>
+            <h3>Headings</h3>
+
+            <details>
+                <summary>
+                    <span style="color: orangered;"><strong>h1</strong></span>
+                </summary>
+                <div>
+                    <h1>Heading 1</h1>
+                </div>
+            </details>
+            <details>
+                <summary>
+                    <span style="color: orangered;"><strong>h2</strong></span>
+                </summary>
+                <div style="text-align: center; ">
+                    <h2>Heading 2</h2>
+                </div>
+            </details>
+            <details>
+                <summary>
+                    <span style="color: orangered;"><strong>h3</strong></span>
+                </summary>
+                <div style="text-align: center; ">
+                    <h3>Heading 3</h3>
+                </div>
+            </details>
+            <details>
+                <summary>
+                    <span style="color: orangered;"><strong>h4</strong></span>
+                </summary>
+                <div style="text-align: center; ">
+                    <h4>Heading 4</h4>
+                </div>
+            </details>
+            <details>
+                <summary>
+                    <span style="color: orangered;"><strong>h5</strong></span>
+                </summary>
+                <div style="text-align: center; ">
+                    <h4>Heading 5</h4>
+                </div>
+            </details>
+            <details>
+                <summary>
+                    <span style="color: orangered;"><strong>accordion</strong></span>
+
+                </summary>
+                <div style="text-align: center; ">
+                    <p style="text-align: left;font-weight: bold;">&lt;div class="accordion " id="accordionExample "&gt;<br /> &lt;div class="accordion-item "&gt;<br /> &lt;h2 class="accordion-header " id="headingOne "&gt;<br /> &lt;button class="accordion-button collapsed " type="button " data-bs-toggle="collapse
+                        " data-bs-target="#collapseOne " aria-expanded="false " aria-controls="collapseOne "&gt;<br /> Accordion Item #1<br /> &lt;/button&gt;<br /> &lt;/h2&gt;<br /> &lt;div id="collapseOne " class="accordion-collapse collapse " aria-labelledby="headingOne
+                        " data-bs-parent="#accordionExample "&gt;
+                        <br /> &lt;div class="accordion-body "&gt;<br /> This is the first item's accordion body.<br /> &lt;/div&gt;<br /> &lt;/div&gt;<br /> &lt;/div&gt;<br /> &lt;div class="accordion-item "&gt;<br /> &lt;h2 class="accordion-header "
+                        id="headingTwo "&gt;<br /> &lt;button class="accordion-button collapsed " type="button " data-bs-toggle="collapse " data-bs-target="#collapseTwo " aria-expanded="false " aria-controls="collapseTwo "&gt;<br /> Accordion Item #2<br
+                        /> &lt;/button&gt;<br /> &lt;/h2&gt;<br /> &lt;div id="collapseTwo " class="accordion-collapse collapse " aria-labelledby="headingTwo " data-bs-parent="#accordionExample "&gt;<br /> &lt;div class="accordion-body "&gt;
+                        <br /> This is the second item's accordion body.<br /> &lt;/div&gt;<br /> &lt;/div&gt;<br /> &lt;/div&gt;<br /> &lt;div class="accordion-item "&gt;<br /> &lt;h2 class="accordion-header " id="headingThree "&gt;<br /> &lt;button
+                        class="accordion-button collapsed " type="button " data-bs-toggle="collapse " data-bs-target="#collapseThree " aria-expanded="false " aria-controls="collapseThree "&gt;<br /> Accordion Item #3<br /> &lt;/button&gt;<br /> &lt;/h2&gt;<br
+                        /> &lt;div id="collapseThree " class="accordion-collapse collapse " aria-labelledby="headingThree " data-bs-parent="#accordionExample "&gt;
+                        <br /> &lt;div class="accordion-body "&gt;<br /> This is the third item's accordion body.<br /> &lt;/div&gt;<br /> &lt;/div&gt;<br /> &lt;/div&gt;<br />&lt;/div&gt;</p>
+                </div>
+            </details>
+        </div>
+
+
+        <div class="arrow" style="text-align: center;margin-top: -60px;">
+            <span style="font-size: 400px;color: orangered;text-shadow: 10px 8px 10px #94e7ea;">&#8593;</span>
+            <h1 style="text-align: center;color: #94e7ea; "><span style="color: orangered;">A</span>ccordion</h1>
+
+            <hr style="width: 350px;margin: auto;background-color: orangered;"><br>
+            <div class="imgbox " style="border: 2px solid gray;width: 90%;text-align: center;margin-left: 50px;height: 90%;display: flex;flex-direction: column;flex: 50%; ">
+                <!-- <div class="imgbox " style="border: 2px solid #94e7ea;width: 90%;text-align: center;margin-left: 50px;height: 950px; "> -->
+                <div class="fullPanel" style=" clear: both; background-color: #94e7ea;width: 100%;height: 100%;">
+
+                    <p style="text-align: left;padding-top: 10px;"><strong>&lt;div class="accordion" id="accordionExample"&gt;</strong><br /><strong>&nbsp; &nbsp;&lt;div class="accordion-item"&gt;</strong><br /><strong>&nbsp; &nbsp; &nbsp; &nbsp;&lt;h2 class="accordion-header" id="headingOne"&gt;</strong><br
+                        /><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-&nbsp; &nbsp; controls="collapseOne"&gt;</strong><br
+                        /><strong> Accordion Item #1</strong><br /><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;/button&gt;</strong><br /><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;/h2&gt;</strong><br /><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample"&gt;</strong><br
+                        /><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;div class="accordion-body"&gt;</strong><br /><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;This is the first item's accordion body.</strong><br /><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;/div&gt;</strong><br
+                        /><strong>&nbsp; &nbsp; &nbsp; &nbsp;&lt;/div&gt;</strong><br /><strong>&nbsp; &nbsp; &nbsp; &lt;/div&gt;</strong><br /><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;div class="accordion-item"&gt;</strong><br /><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;h2 class="accordion-header" id="headingTwo"&gt;</strong><br
+                        /><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"&gt;</strong><br
+                        /><strong> Accordion Item #2</strong><br /><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;/button&gt;</strong><br /><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;/h2&gt;</strong><br
+                        /><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div id="collapseTwo" class="accordion-collapse collapse" aria -labelledby="headingTwo" data-bs-parent="#accordionExample"&gt;</strong><br /><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class="accordion-body"&gt;</strong><br
+                        /><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;This is the second item's accordion body.</strong><br /><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;/div&gt;</strong><br /><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;/div&gt;</strong><br
+                        /><strong>&nbsp; &nbsp; &nbsp;&lt;/div&gt;</strong><br /><strong>&nbsp; &nbsp; &nbsp;&lt;div class="accordion-item"&gt;</strong><br /><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;h2 class="accordion-header" id="headingThree"&gt;</strong><br
+                        /><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"&gt;</strong><br
+                        /><strong> Accordion Item #3</strong><br /><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/button&gt;</strong><br /><strong>&nbsp; &nbsp; &nbsp; &nbsp; &lt;/h2&gt;</strong><br /><strong>&nbsp; &nbsp; &nbsp; &nbsp; &lt;div id="collapseThree" class="accordion-collapse collapse" aria- labelledby="headingThree" data-bs-parent="#accordionExample"&gt;</strong><br
+                        /><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class="accordion-body"&gt;</strong><br /><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; This is the third item's accordion body.</strong><br /><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</strong><br
+                        /><strong>&nbsp; &nbsp; &nbsp; &lt;/div&gt;</strong><br /><strong>&nbsp; &lt;/div&gt;</strong><br /><strong>&lt;/div&gt;</strong></p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- accordion -->
+
+        <!-- tab -->
+
+
+
+        <br>
+        <h1 style="text-align: center;color: #94e7ea; "><span style="color: orangered;">M</span>ultiple <span style="color: orangered;">T</span>abs</h1>
+        <hr style="width: 350px;margin: auto;background-color: orangered;  "><br>
+        <p style="text-align: center;font-weight: bold; ">Lead,CTA,Blockquotes,Dummy</p>
+        <br>
+        <!-- <div class="tab ">
+            <button class="tablinks " onclick="openCity(event, 'Lead') ">Lead</button>
+            <button class="tablinks " onclick="openCity(event, 'CTA') ">CTA</button>
+            <button class="tablinks " onclick="openCity(event, 'Blockquotes') ">Blockquotes</button>
+            <button class="tablinks " onclick="openCity(event, 'Dummy') ">Dummy</button>
+        </div> -->
+
+        <!-- <div id="Lead " class="tabcontent ">
+            <h3>lead</h3>
+            <pre>
+                &lt;p class="lead "&gt;
+                This is a lead paragraph. It stands out 
+                from regular paragraphs.
+                &lt;/p&gt;
+            </pre>
+            <p class="lead ">
+                OUTPUT:- This is a lead paragraph. It stands out from regular paragraphs.
+            </p>
+
+
+        </div>
+
+        <div id="CTA " class="tabcontent ">
+            <h3>CTA</h3>
+            <pre>
+                &lt;p class="cta "&gt;
+                This is a CTA content.
+                &lt;/p&gt;
+            </pre>
+            <p class="cta ">
+                OUTPUT:- This is a CTA content.
+            </p>
+        </div>
+
+        <div id="Blockquotes " class="tabcontent ">
+            <h3>Blockquotes</h3>
+            <pre>
+                &lt;blockquote class="blockquote "&gt;
+                A well-known quote, contained in a blockquote element.
+                &lt;/blockquote&gt;
+            </pre>
+            <blockquote class="blockquote ">
+                OUTPUT:- A well-known quote, contained in a blockquote element.
+            </blockquote>
+
+        </div>
+
+        <div id="Dummy " class="tabcontent ">
+            <h3>Dummy</h3>
+            <p>Dummy Dummy.</p>
+        </div> -->
+
+
+        <div class="tab">
+            <button class="tablinks" onclick="openCity(event, 'Lead')"><b>Lead</b></button>
+            <button class="tablinks" onclick="openCity(event, 'CTA')"><b>CTA</b></button>
+            <button class="tablinks" onclick="openCity(event, 'Blockquotes')"><b>Blockquotes</b></button>
+        </div>
+
+        <div id="Lead" class="tabcontent">
+            <h3>lead</h3>
+            <pre style="font-weight: bold;">
+                &lt;p class="lead "&gt;
+                This is a lead paragraph. It stands out 
+                from regular paragraphs.
+                &lt;/p&gt;
+            </pre>
+            <p class="lead " style="font-weight: bold;">
+                OUTPUT:- This is a lead paragraph. It stands out from regular paragraphs.
+            </p>
+        </div>
+
+        <div id="CTA" class="tabcontent">
+            <h3>CTA</h3>
+            <pre style="font-weight: bold;">
+            &lt;p class="cta "&gt;
+            This is a CTA content.
+            &lt;/p&gt;
+        </pre>
+            <p class="cta " style="font-weight: bold;">
+                OUTPUT:- This is a CTA content.
+            </p>
+        </div>
+
+        <div id="Blockquotes" class="tabcontent">
+            <h3>Blockquotes</h3>
+            <pre style="font-weight: bold;">
+            &lt;blockquote class="blockquote "&gt;
+            A well-known quote, contained in a blockquote element.
+            &lt;/blockquote&gt;
+        </pre>
+            <blockquote class="blockquote " style="font-weight: bold;text-align: center;">
+                OUTPUT:- A well-known quote, contained in a blockquote element.
+            </blockquote>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- dropdown -->
+        <div class="space ">
+        </div>
+
+        <div class="layout ">
+            <h1 style="color: #94e7ea; "><span style="color: orangered; ">S</span>ample <span style="color: orangered; ">D</span>ropdown</h1>
+            <hr style="width: 350px;margin: auto;background-color: orangered; "><br>
+            <div class="container ">
+                <p class="dropdown-title " style="cursor: pointer; ">Sample Dropdown</p>
+                <div class="item-container ">
+                    <p class="item-text " style="cursor: pointer; ">Dropdown Item </p>
+                    <p class="item-text " style="cursor: pointer; ">Dropdown Item</p>
+                    <p class="item-text " style="cursor: pointer; ">Dropdown Item</p>
+                    <p class="item-text " style="cursor: pointer; ">Dropdown Item</p>
+                    <p class="item-text " style="cursor: pointer; ">Dropdown Item</p>
+                </div>
+            </div>
+        </div>
+        <!-- dropdown -->
+
+
+
+
+
+
+
+        <!-- flip card -->
+        <h1 style="color: #94e7ea; "><span style="color: orangered; ">F</span>lip <span style="color: orangered; ">C</span>ard</h1>
+        <hr style="width: 350px;margin: auto;background-color: orangered; "><br>
+        <h3 style="text-align: center; font-weight: bold;font-size: 40px;"><strong>Lists</strong></h3>
+
+        <div class="myarrow" style="text-align: center;margin-top: -100px;margin-bottom: -110px;">
+            <!-- left -->
+            <!-- <span style="font-size: 400px;color: orangered;text-shadow: 10px 8px 10px #94e7ea;">&#8593;</span> -->
+            <!-- <span style="font-size: 300px;color: #94e7ea;text-shadow: 1px 1px 10px orangered;">&#8601;</span> -->
+            <span style="font-size: 300px;color: orangered;text-shadow: 10px 8px 10px #94e7ea;">&#8601;</span>
+            <!-- left -->
+
+            <!-- right -->
+            <!-- <span style="font-size: 300px;color: #94e7ea;text-shadow: 1px 1px 10px orangered;">&#8600;</span> -->
+            <span style="font-size: 300px;color: orangered;text-shadow: 10px 8px 10px #94e7ea;">&#8600;</span>
+            <!-- right -->
+        </div>
+        <div class="cardContainer ">
+
+            <div class="flip-card c1 ">
+
+                <p style="margin: auto; "><strong>Unstyled</strong></p><br><br>
+                <div class="flip-card-inner ">
+                    <div class="flip-card-front grid ">
+                        <h4 class="font2 ">
+                            <p style="text-align: left; ">&lt;ul class="list-unstyled "&gt;<br /> &lt;li&gt;This is a list.<br /> &lt;li&gt;It appears completely unstyled.<br /> &lt;li&gt;Structurally, it's still a list.<br /> &lt;li&gt;However, this style only applies to immediate
+                                child elements.<br /> &lt;li&gt;Nested lists:<br /> &lt;ul&gt;<br /> &lt;li&gt;are unaffected by this style<br /> &lt;li&gt;will still show a bullet<br /> &lt;li&gt;and have appropriate left margin<br /> &lt;/ul&gt;<br
+                                /> &lt;/li&gt;<br /> &lt;li&gt;This may still come in handy in some situations.<br />&lt;/ul&gt;</p>
+                        </h4>
+
+                    </div>
+                    <div class="cardBottomText ">
+                        <lord-icon src="https://cdn.lordicon.com/mwqnntww.json " trigger="loop " style="width:32px;height:32px ">
+                        </lord-icon>
+                    </div>
+                    <div class="flip-card-back ">
+                        <h5 class="gradientText ">
+                            <p><b><u>Output:-</u></b></p><br>
+                            <ul class="list-unstyled " style="text-align: left; ">
+                                <li>This is a list.
+                                    <li>It appears completely unstyled.
+                                        <li>Structurally, it's still a list.
+                                            <li>However, this style only applies to immediate child elements.
+                                                <li>Nested lists:
+                                                    <ul style="margin-left: 15px; ">
+                                                        <li>are unaffected by this style
+                                                            <li>will still show a bullet
+                                                                <li>and have appropriate left margin
+                                                    </ul>
+                                                    </li>
+                                                    <li>This may still come in handy in some situations.
+                            </ul>
+                            </h1>
+                    </div>
+                </div>
+            </div>
+
+            <!-- flip card -->
+            <!-- flip card -->
+
+            <div class="flip-card c1 ">
+                <p style="margin: auto; "><strong>Inline</strong></p><br><br>
+
+                <div class="flip-card-inner ">
+                    <div class="flip-card-front grid ">
+                        <h4 class="font2 ">
+                            <p style="text-align: left; ">&lt;ul class="list-inline "&gt;<br /> &lt;li class="list-inline-item "&gt;This is a list item.<br /> &lt;li class="list-inline-item "&gt;And another one.<br /> &lt;li class="list-inline-item "&gt;But they're displayed inline.<br
+                                />&lt;/ul&gt;</p>
+                        </h4>
+                    </div>
+                    <div class="cardBottomText ">
+
+                    </div>
+                    <div class="flip-card-back ">
+                        <h5 class="gradientText ">
+                            <p><b><u>Output:-</u></b></p><br>
+                            <ul class="list-inline " style="text-align: left; ">
+                                <li class="list-inline-item ">This is a list item.
+                                    <li class="list-inline-item ">And another one.
+                                        <li class="list-inline-item ">But they're displayed inline.
+                            </ul>
+
+                            </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="parents ">
+            <div class="child ">
+                <p style="text-align: left; "><strong>Unstyled</strong> Remove the default <span style="color: rgb(111, 5, 5); ">list-style</span> and <span style="color: rgb(111, 5, 5); ">left margin</span> on list items (immediate children only). <strong>This only applies to immediate children list items</strong>,
+                    meaning you will need to add the class for any nested lists as well.</p>
+            </div>
+            <div class="child ">
+                <p style="text-align: left; "><strong>Inline</strong> Remove a list’s bullets and apply some light <span style="color: rgb(111, 5, 5); ">margin</span> with a combination of two classes, <span style="color: rgb(111, 5, 5); ">.list-inline</span> and <span style="color: rgb(111, 5, 5); ">.list-inline-item</span>.</p>
+            </div>
+        </div>
+
+        <!-- flip card -->
+
+
+
+        <!-- table -->
+
+
+
+
+        <h1 style="text-align: center;margin-bottom: 10px;color: #94e7ea; "><span style="color: orangered; ">T</span>able</h1>
+        <hr style="width: 350px;margin: auto;background-color: orangered; "><br>
+
+        <div class="myarrow" style="text-align: center;margin-top: -60px;">
+            <span style="font-size: 200px;color: orangered;text-shadow: 10px 8px 10px #94e7ea;">&#10507;</span>
+        </div>
+
+
+        <div class="parents ">
+            <div class="child ">
+                <table class="table table-bordered table-border-color " style="border-collapse: collapse; border: 1px solid black;width: 100%;height: 100%; ">
+                    <thead>
+                        <tr>
+                            <th scope="col " style="border-collapse: collapse; border: 1px solid black; ">#</th>
+                            <th scope="col " style="border-collapse: collapse; border: 1px solid black; ">First</th>
+                            <th scope="col " style="border-collapse: collapse; border: 1px solid black; ">Last</th>
+                            <th scope="col " style="border-collapse: collapse; border: 1px solid black; ">Handle</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row " style="border-collapse: collapse; border: 1px solid black; ">1</th>
+                            <td style="border-collapse: collapse; border: 1px solid black; ">Mark</td>
+                            <td style="border-collapse: collapse; border: 1px solid black; ">Otto</td>
+                            <td style="border-collapse: collapse; border: 1px solid black; ">@mdo</td>
+                        </tr>
+                        <tr>
+                            <th scope="row " style="border-collapse: collapse; border: 1px solid black; ">2</th>
+                            <td style="border-collapse: collapse; border: 1px solid black; ">Jacob</td>
+                            <td style="border-collapse: collapse; border: 1px solid black; ">Thornton</td>
+                            <td style="border-collapse: collapse; border: 1px solid black; ">@fat</td>
+                        </tr>
+                        <tr>
+                            <th scope="row " style="border-collapse: collapse; border: 1px solid black; ">3</th>
+                            <td colspan="2 " style="border-collapse: collapse; border: 1px solid black; ">Larry the Bird</td>
+                            <td style="border-collapse: collapse; border: 1px solid black; ">@twitter</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="child " style="border-left: 3px solid black; box-shadow: -10px 0px 10px 0 black; ">
+                <strong>
+                    <p style="text-align: left;margin-left: 20px;word-wrap: break-word; ">&lt;table class="table table-bordered table-border-color "&gt;<br /> &lt;thead&gt;<br /> &lt;tr&gt;<br /> &lt;th scope="col
+            "&gt;#&lt;/th&gt;<br /> &lt;th scope="col "&gt;First&lt;/th&gt;<br /> &lt;th scope="col "&gt;Last&lt;/th&gt;<br />                    &lt;th scope="col "&gt;Handle&lt;/th&gt;<br /> &lt;/tr&gt;<br /> &lt;/thead&gt;<br /> &lt;tbody&gt;<br /> &lt;tr&gt;<br /> &lt;th scope="row "&gt;1&lt;/th&gt;<br /> &lt;td&gt;Mark&lt;/td&gt;<br /> &lt;td&gt;Otto&lt;/td&gt;<br /> &lt;td&gt;@mdo&lt;/td&gt;<br
+                        /> &lt;/tr&gt;<br /> &lt;tr&gt;<br /> &lt;th scope="row
+            "&gt;2&lt;/th&gt;<br /> &lt;td&gt;Jacob&lt;/td&gt;<br /> &lt;td&gt;Thornton&lt;/td&gt;<br /> &lt;td&gt;@fat&lt;/td&gt;<br /> &lt;/tr&gt;<br /> &lt;tr&gt;<br /> &lt;th scope="row "&gt;3&lt;/th&gt;<br
+                        /> &lt;td colspan="2 "&gt;Larry the Bird&lt;/td&gt;<br /> &lt;td&gt;@twitter&lt;/td&gt;<br /> &lt;/tr&gt;<br /> &lt;/tbody&gt;<br /> &lt;/table&gt;</p>
+    
+                </strong>
+            </div>
+            <!-- <div class="child ">
+                    <p></p>
+                </div> -->
+        </div>
+        </div>
+
+
+        <!-- table -->
+
+
+
+        <!-- timeline -->
+        <h1 style="text-align: center;margin-top: 10%;margin-bottom: 10px; color: #94e7ea; "><span style="color: orangered; ">T</span>ime <span style="color: orangered; ">L</span>line <span style="color: orangered; ">&</span> <span style="color: orangered; ">V</span>ideo</h1>
+        <hr style="width: 350px;margin: auto;background-color: orangered; "><br>
+        <div class="parents ">
+            <div class="child " style="width: 100%;height: 100%; ">
+
+
+                <div class="box " style="width: 100%;height: 600px; ">
+                    <iframe id="player1 " name="player1 " class="__embedpearsonvideoplayer__ " src="https://mediaplayer.pearsoncmg.com/assets/_video.true/HE_Math-croft6e_1292095172-Project19
+            " webkitallowfullscreen mozallowfullscreen allowfullscreen height="100% " width="100% " title="Video "></iframe>
+                </div>
+
+
+                <div class="fullPanel " style="padding: 2em;margin: 1em auto 3em; clear: both; background-color: #94e7ea;width: 100%;height: 100%; ">
+                    <p style="word-wrap: break-word;font-weight: bold;text-align: left; ">&lt;iframe id="player1 " name="player1 "<br />class="__embedpearsonvideoplayer__ "src="https://mediaplayer.pearsoncmg.com/assets/_video.true/HE_Math-croft6e_1292095172-Project19 "<br />webkitallowfullscreen mozallowfullscreen allowfullscreen
+                        height="480 " width="640 " title="Video "&gt;&lt;/iframe&gt;<br />&lt;p&gt;&lt;a href="https://media.pearsoncmg.com/intl/ema/ema_uk_he_croft_foundmaths_6/EEB/PDF/Project19.pdf " target="_blank "&gt;Transcript&lt;/a&gt;&lt;/p&gt;</p>
+                </div>
+
+            </div>
+
+
+            <div class="fullPanel " style="padding: .2em;margin: .5em auto .5em; clear: both; background-color: #333333;border-radius: 15px;box-shadow: -1px 1px 8px 0 rgb(225, 115, 75); border: 3px solid orangered, 1px -1px 8px 0 #94e7ea; border: 3px
+            solid #94e7ea; ">
+                <!-- <div class="fullPanel " style="padding: 1em;margin: 1em auto 3em; clear: both; background-color: #050404;border-radius: 15px; "> -->
+
+            </div>
+            <div class="child " style="width: 100%;height: 100%; ">
+                <div class="timeline " style="margin-top: -50px; ">
+                    <div class="outer ">
+                        <div class="card ">
+                            <div class="info ">
+                                <h3 class="title ">Introduction</h3>
+
+                            </div>
+                        </div>
+
+                        <div class="card ">
+                            <div class="info ">
+                                <h3 class="title ">Typography</h3>
+
+                            </div>
+                        </div>
+                        <div class="card ">
+                            <div class="info ">
+                                <h3 class="title ">Multiple Tabs</h3>
+
+                            </div>
+                        </div>
+                        <div class="card ">
+                            <div class="info ">
+                                <h3 class="title ">Paragraph</h3>
+
+                            </div>
+                        </div>
+                        <div class="card ">
+                            <div class="info ">
+                                <h3 class="title ">Lead</h3>
+
+                            </div>
+                        </div>
+                        <div class="card ">
+                            <div class="info ">
+                                <h3 class="title ">CTA</h3>
+
+                            </div>
+                        </div>
+                        <div class="card ">
+                            <div class="info ">
+                                <h3 class="title ">Blockquotes</h3>
+
+                            </div>
+                        </div>
+                        <div class="card ">
+                            <div class="info ">
+                                <h3 class="title ">Lists</h3>
+
+                            </div>
+                        </div>
+                        <div class="card ">
+                            <div class="info ">
+                                <h3 class="title ">Inline</h3>
+
+                            </div>
+                        </div>
+                        <div class="card ">
+                            <div class="info ">
+                                <h3 class="title ">Components</h3>
+
+                            </div>
+                        </div>
+
+                        <!-- <div class="card ">
+                            <div class="info ">
+                                <h3 class="title ">Title 2</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                    consequat.
+                                </p>
+                            </div> -->
+                    </div>
+                    <!-- <div class="card ">
+                            <div class="info ">
+                                <h3 class="title ">Title 3</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                    consequat.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="card ">
+                            <div class="info ">
+                                <h3 class="title ">Title 4</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                    consequat.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="card ">
+                            <div class="info ">
+                                <h3 class="title ">Title 5</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                    consequat.
+                                </p>
+                            </div>
+                        </div> -->
+                </div>
+
+
+
+
+
+            </div>
+
+
+
+
+        </div>
+        </div>
+        <!-- timeline -->
+        <!-- audio -->
+        <h1 style="color: #94e7ea; "><span style="color: orangered; ">A</span>udio</h1>
+        <hr style="width: 350px;margin: auto;background-color: orangered; "><br>
+        <div class="audio " style="text-align: center;margin-left: 30%; ">
+            <iframe id="audplayer " name="audplayer " class="__embedpearsonvideoplayer__ " src="https://mediaplayer.pearsoncmg.com/assets/_audio.true/saunders_rev_07_08 " webkitallowfullscreen mozallowfullscreen allowfullscreen title="Audio
+            " style=" width: 100%;height: 100%;border: none;outline: none;margin: auto; "></iframe>
+
+        </div>
+        <div class="fullPanel " style="padding: 2em;margin: 1em auto 3em; clear: both; background-color: #94e7ea;width: 100%;height: 100%; ">
+            <p style="text-align: left;word-wrap: break-word;font-weight: bold; ">&lt;iframe id="audplayer " name="audplayer "<br />class="__embedpearsonvideoplayer__ "src="https://mediaplayer.pearsoncmg.com/assets/_audio.true/saunders_rev_07_08 "
+                <br />webkitallowfullscreen mozallowfullscreen allowfullscreen title="Audio "&gt;&lt;/iframe&gt;<br />&lt;p&gt;&lt;a href="https://media.pearsoncmg.com/intl/ema/ema_uk_he_croft_foundmaths_6/EEB/PDF/Project19.pdf " target="_blank "&gt;Transcript&lt;/a&gt;&lt;/p&gt;</p>
+        </div>
+        <!-- audio -->
+
+
+        <!-- Components -->
+        <h1 style="margin:0;padding: 0; color: #94e7ea; " id="Components"><span style="color: orangered; ">C</span>omponents</h1>
+        <hr style="width: 350px;margin: auto;background-color: orangered; "><br>
+        <h3 style="margin-left: 50px; ">Image</h3>
+        <div class="imgbox " style="border: 2px solid gray;width: 90%;text-align: center;margin-left: 50px;height: 90%;display: flex;flex-direction: column;flex: 50%;align-items: center; ">
+            <img src="./images/img.png " class="img-fluid " alt="Alt text placeholder " width="55% " style="padding-top: 25px; ">
+            <div class="fullPanel " style="padding: 2em;margin: 1em auto 3em; clear: both; background-color: #94e7ea; ">
+                <p style="font-weight: bold;text-align: left; ">&lt;img src="images/img.png " class="img-fluid "&nbsp; alt="Alt text placeholder "&gt;</p>
+            </div>
+
+
+        </div>
+        <!-- Components -->
+
+        <!-- FigComponents -->
+        <br><br>
+        <h3 style="margin-left: 50px; ">Figures</h3>
+        <div class="imgbox " style="border: 2px solid gray;width: 90%;text-align: center;margin-left: 50px;height: 90%;display: flex;flex-direction: column;flex: 50%; ">
+            <!-- <img src="./images/img.png " alt="Alt text placeholder " width="550px " style="padding-top: 25px; "> -->
+            <figure class="figure ">
+                <img src="images/img.png " class="img-fluid " alt="Alt text placeholder " width="55% " style="padding-top: 25px; " />
+                <figcaption class="figure-caption ">A caption for the above image.</figcaption>
+            </figure>
+
+            <div class="fullPanel " style="padding: 2em;margin: 1em auto 3em; clear: both; background-color: #94e7ea; ">
+                <p style="font-weight: bold;text-align: left; ">&lt;figure class="figure "&gt;<br /> &lt;img src="images/img.png " class="img-fluid " alt="Alt text placeholder "/&gt;<br /> &lt;figcaption class="figure-caption "&gt;A caption for the above image.&lt;/figcaption&gt;<br />&lt;/figure&gt;</p>
+            </div>
+
+
+        </div>
+        <!-- FigComponents -->
+
+        <!-- slideshow -->
+        <!-- <h1 style="color: #94e7ea; "><span style="color: orangered; ">S</span>lideshow <span style="color: orangered; ">+</span> <span style="color: orangered; ">M</span>cq</h1> -->
+        <!-- <hr tyle="width: 350px;margin: auto;background-color: orangered; "> -->
+        <!-- <hr style="width: 350px;margin: auto;background-color: orangered; "><br> -->
+
+
+
+        <br><br>
+
+
+        <div class="imgbox " style="border: 2px solid gray;width: 90%;text-align: center;margin-left: 50px;height:200px; ">
+            <div class="slideshow-container ">
+
+                <div class="mySlides fade " style="font-weight: bold; ">
+                    <div class="numbertext ">1 / 3
+                        <p style="text-align: center; ">Question 1</p><br>
+                        <ul style="text-align: center; list-style: none; ">
+                            <li>Ans</li>
+                            <li>Ans</li>
+                            <li>Ans</li>
+                            <li>Ans</li>
+                        </ul>
+                    </div>
+
+                    <!-- <div class="text ">Caption Text</div> -->
+                </div>
+
+                <div class="mySlides fade " style="font-weight: bold; ">
+                    <div class="numbertext ">2 / 3</div>
+                    <p style="text-align: center; ">Question 2</p><br>
+                    <ul style="text-align: center; list-style: none; ">
+                        <li>Ans</li>
+                        <li>Ans</li>
+                        <li>Ans</li>
+                        <li>Ans</li>
+                    </ul>
+                </div>
+
+                <div class="mySlides fade " style="font-weight: bold; ">
+                    <div class="numbertext ">3 / 3</div>
+                    <p style="text-align: center; ">Question 3</p><br>
+                    <ul style="text-align: center; list-style: none; ">
+                        <li>Ans</li>
+                        <li>Ans</li>
+                        <li>Ans</li>
+                        <li>Ans</li>
+                    </ul>
+                </div>
+
+                <a class="prev " onclick="plusSlides(-1) " style=" margin: 100px; cursor: pointer; ">❮</a>
+                <a class="next " onclick="plusSlides(1) " style=" margin: 100px;cursor: pointer; ">❯</a>
+
+            </div>
+            <br>
+
+            <div style="text-align:center ">
+                <span class="dot " onclick="currentSlide(1) "></span>
+                <span class="dot " onclick="currentSlide(2) "></span>
+                <span class="dot " onclick="currentSlide(3) "></span>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- slideshow -->
+
+            <!-- accordion -->
+
+            <!-- accordion -->
+
+
+
+
+
+
+            <!-- tab -->
+
+            <!-- text input -->
+            <h1 style="color: #94e7ea; "><span style="color: orangered; ">C</span>ontact <span style="color: orangered; ">U</span>S <span style="color: orangered; ">+</span> <span style="color: orangered; ">I</span>nput <span style="color: orangered; ">T</span>ext</h1>
+            <hr style="width: 350px;margin: auto;background-color: orangered; "><br>
+            <div class="myfrom " style="width: 100%;text-align: center;margin-left: 50px;height: 90%;display: flex;flex-direction: column;flex: 50%; ">
+                <!-- <div class="myfrom " style="width: 100%; "> -->
+                <form style="display: flex;flex-direction: column;justify-content: center;align-items: center;gap: 10px;flex-wrap: wrap; ">
+                    <input style="width: 100%; border: none;background-color: #94e7ea;border-radius: 15px;padding-left: 30px;padding: 10px;box-shadow: 1px 1px 2px 0 orangered;font-weight: bold;font-size: large;color: #fff; " type="text " name="name
+            " placeholder="Enter your name " id=" ">
+                    <input style="width: 100%;  border: none;background-color: #94e7ea;border-radius: 15px;padding-left: 30px;padding: 10px;box-shadow: 1px 1px 2px 0 orangered;font-weight: bold;font-size: large;color: #fff; " type="text " name="
+            " placeholder="Enter your email id " id=" ">
+                    <input style="width: 100%;  border: none;background-color: #94e7ea;border-radius: 15px;padding-left: 30px;padding: 10px;box-shadow: 1px 1px 2px 0 orangered;font-weight: bold;font-size: large;color: #fff; " type="text " name="
+            " placeholder="Enter Your ph No " id=" ">
+                    <button class="mybtn " type="submit " style="width: 200px; border: none;background-color: orangered;border-radius: 5px; cursor: pointer; padding-left: 30px;padding: 10px;box-shadow: 2px 2px 10px 0 #94e7ea;font-weight: bold;font-size:
+            large;color: #fff; ">Submit</button>
+                </form>
+            </div>
+            <!-- text input -->
+
+        </div>
+
+</body>
+<script>
+    function openCity(evt, cityName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent ");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none ";
+        }
+        tablinks = document.getElementsByClassName("tablinks ");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active ", " ");
+        }
+        document.getElementById(cityName).style.display = "block ";
+        evt.currentTarget.className += " active ";
+    }
+    // dropdown
+    const dropdown = document.querySelector('.container');
+
+    track = 0;
+
+    dropdown.addEventListener('click', () => {
+        const container = document.querySelector('.item-container');
+
+        if (track === 0) {
+            container.style.maxHeight = '700px';
+            track++;
+        } else {
+            container.style.maxHeight = '0px';
+            track--;
+        }
+    })
+
+    // dropdown
+    // slideshow
+    let slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        let i;
+        let slides = document.getElementsByClassName("mySlides ");
+        let dots = document.getElementsByClassName("dot ");
+        if (n > slides.length) {
+            slideIndex = 1
+        }
+        if (n < 1) {
+            slideIndex = slides.length
+        }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none ";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active ", " ");
+        }
+        slides[slideIndex - 1].style.display = "block ";
+        dots[slideIndex - 1].className += " active ";
+    }
+    // slideshow
+</script>
+
+</html>

@@ -1,0 +1,70 @@
+@font-face {
+  font-family: OpenSans-Regular;
+  font-display: swap;
+  src: url("OpenSans-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: OpenSans-SemiBold;
+  font-display: swap;
+  src: url(OpenSans-SemiBold.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: OpenSans-SemiBoldItalic;
+  font-display: swap;
+  src: url(OpenSans-SemiBoldItalic.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: OpenSans-Bold;
+  font-display: swap;
+  src: url(OpenSans-Bold.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: OpenSans-BoldItalic;
+  font-display: swap;
+  src: url(OpenSans-BoldItalic.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: OpenSans-ExtraBold;
+  font-display: swap;
+  src: url(OpenSans-ExtraBold.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: OpenSans-ExtraBoldItalic;
+  font-display: swap;
+  src: url(OpenSans-ExtraBoldItalic.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: OpenSans-Italic;
+  font-display: swap;
+  src: url(OpenSans-Italic.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: OpenSans-Light;
+  font-display: swap;
+  src: url(OpenSans-Light.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: OpenSans-LightItalic;
+  font-display: swap;
+  src: url(OpenSans-LightItalic.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: OpenSans-Medium;
+  font-display: swap;
+  src: url(OpenSans-Medium.ttf) format("truetype");
+}
+@font-face {
+  font-family: OpenSans-MediumItalic;
+  font-display: swap;
+  src: url(OpenSans-MediumItalic.ttf) format("truetype");
+}
